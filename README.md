@@ -1,2 +1,2 @@
 # StackOverflowBot
-A Telegram bot that use Stack API to search questions
+A Telegram bot that use StackOverflow API to search questions
