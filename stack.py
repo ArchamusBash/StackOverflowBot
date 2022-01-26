@@ -14,7 +14,7 @@ def Start(message):
     bot.send_message(message.chat.id, "Welcome! I will help you find questions and answers in StackOverflow! Put @FStackOverflowBot in command line I will show you the results accordingly.")
 
 #Inline query
-@bot.inline_handler(lambda query: query.query == arr)
+@bot.inline_handler(lambda query: query.query == "text")
 def Inline(inline_query):
     return
 
