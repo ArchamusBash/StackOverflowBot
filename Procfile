@@ -1,1 +1,1 @@
-bot: exec python3 stack.py
+worker: python3 stack.py
