@@ -2,8 +2,6 @@ import telebot
 import os
 import requests
 
-from click import command
-from dotenv import load_dotenv
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 #I will leave it the way it is for now, im tired
