@@ -1,7 +1,14 @@
 import telebot
 import os
+import requests
+
+from click import command
+from dotenv import load_dotenv
+from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 #I will leave it the way it is for now, im tired
 
+load_dotenv()
 #bot API token and other stuff
 API = os.getenv("API")
 
@@ -18,4 +25,21 @@ def Start(message):
 def Inline(inline_query):
     return
 
-bot.polling()
+#
+@bot.message_handler(commands=["trending"])
+def Trending(message):
+    try:
+        url = "https://stackoverflow.com/questions/"
+        stack = requests.get(url)
+        soup = BeautifulSoup(stack.text, 'html.parser')
+        trending = soup.find("a", {'class': 'question-hyperlink', 'href': True}).extract()
+        #Block telegram api escape
+        title = trending.text.replace("=", "\\=").replace("-", "\\-").replace("+", "\\+")
+        bot.send_message(message.chat.id, f"{title}\n [See more](https://stackoverflow.com/{trending['href']})", parse_mode='MarkdownV2')
+    except Exception as err: print(f"Error: {err}")
+
+def main():    
+    bot.polling() #waiting for messages
+
+if __name__ == '__main__':
+    main() 
